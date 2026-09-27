@@ -5,14 +5,14 @@ Platform
 --------
 These commands were written to run on a [1802-Mini](https://github.com/dmadole/1802-Mini) by David Madole and the [AVI Elf-II](https://github.com/awasson/AVI-ELF-II) by Andrew Wasson, Josh Bensadon *et al*.
 
-A lot of information and software for the Pico/Elf and the 1802-Mini can be found on the [Elf-Emulation](http://www.elf-emulation.com/) website and in the [COSMAC ELF Group](https://groups.io/g/cosmacelf) at groups.io.
+A lot of information and software for Elf-DOS and the 1802-Mini can be found in the [COSMAC ELF Group](https://groups.io/g/cosmacelf) at groups.io.
 
 These commands were written to run under [Elf-DOS](https://github.com/arhefner/ELF-DOS) written by Tony Hefner.
 
 Elf-DOS Utility Commands
 --------------------------
 ## cal
-**Usage:** cal [-d|-e]
+**Usage:** cal [month year]
 A Linux-style calendar utility originally written for Elf/OS by [Wayne Hortensius](https://github.com/mecparts/Elf-Elfos-cal) and adapted for Elf-DOS.
 
 If your Elf system includes an RTC, typing `cal` on the command line will show a calendar of the current month, with the current date highlighted. (The highlighting assumes a VT100/ANSI style terminal.)
