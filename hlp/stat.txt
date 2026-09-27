@@ -1,0 +1,5 @@
+Command: stat - File or Directory Status
+
+Syntax: stat <path>	
+
+Show a file or directory's type, size, first cluster, and the date and time it was last written.

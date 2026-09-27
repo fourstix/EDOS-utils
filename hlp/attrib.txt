@@ -1,0 +1,14 @@
+Command: attrib - File or Directory Attributes
+
+Syntax:  attrib [+H|-H] <path...>	
+
+Show or change a file's hidden attribute. With no +H/-H, shows whether each file is hidden. +H hides it; -H unhides it.
+
+Options:
+  +H set file's hidden attribute
+  -H clear file's hidden attribute 
+
+Wildcards: 
+
+The characters * and ? can be used in a file name to match more than one file, the same as in MS-DOS. * matches any run of characters; ? matches any one character. Wildcards are understood by DIR, LS, COPY, MOVE, DEL, ATTRIB, XCOPY, and YS. If a wildcard does not match anything, the command is given the text exactly as typed instead.
+

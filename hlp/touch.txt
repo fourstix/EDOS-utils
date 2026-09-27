@@ -1,0 +1,5 @@
+Command: touch - Update a File's Timestamp
+
+Syntax: touch <file...>
+
+Updates a file's last-modified time to right now, without changing its contents. It will not create a new file.

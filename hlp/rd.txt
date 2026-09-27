@@ -1,0 +1,5 @@
+Command: rd - Remove Directory
+
+Syntax:	rd <path>	
+
+Remove an empty directory. This command will fail if the directory has files in it.

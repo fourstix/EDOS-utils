@@ -1,0 +1,5 @@
+Command: pwd - Print Working Directory
+
+Syntax:	pwd	
+
+Prints the full path of the current directory.

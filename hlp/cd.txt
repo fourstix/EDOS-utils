@@ -1,0 +1,6 @@
+Command: cd - Change Directory
+
+Syntax:	cd <path>	
+
+Change the current directory. The command cd .. goes up one level; cd / goes to the root.
+

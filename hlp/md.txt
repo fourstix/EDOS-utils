@@ -1,0 +1,5 @@
+Command: md - Make Directory
+
+Syntax:	md <path>	
+
+Make a new, empty directory. The directory above it must already exist.

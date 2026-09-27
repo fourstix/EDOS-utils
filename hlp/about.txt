@@ -1,0 +1,5 @@
+Batch File: about.bat - Show Information About a Disk
+
+Syntax:	about.bat	
+
+Display the contents of the about.nfo file in the disk's /cfg directory.

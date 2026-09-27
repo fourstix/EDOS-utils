@@ -1,0 +1,9 @@
+Batch File: help.bat - Show Help Information
+
+Syntax:	help.bat <command>	
+
+Display the help information for the command.  If the command is not found,
+help.bat will display this file.
+
+Help is available for the following commands:  
+  about.bat, attrib, cd, dir, edlin, help.bat, ls, md, rd, pwd, stat

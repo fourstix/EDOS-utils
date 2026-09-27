@@ -1,0 +1,16 @@
+Command: ls - List Directory
+
+Syntax:	ls [-laF] [path...]
+
+Lists a directory, Unix-style. Plain columns by default. 
+
+Options:
+  -l gives a detailed, one-line-per-entry listing. 
+  -a includes hidden files. 
+  -F marks directories with a trailing /.
+
+Options can be combined (-lF) or separated (-l -F), and go anywhere on the line.
+
+Wildcards:
+
+The characters * and ? can be used in a file name to match more than one file, the same as in MS-DOS. * matches any run of characters; ? matches any one character. Wildcards are understood by DIR, LS, COPY, MOVE, DEL, ATTRIB, XCOPY, and YS. If a wildcard does not match anything, the command is given the text exactly as typed instead.

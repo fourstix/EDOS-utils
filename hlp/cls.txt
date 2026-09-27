@@ -1,0 +1,5 @@
+Command: cls - Clear Screen
+
+Syntax: cls
+
+Clear the screen.

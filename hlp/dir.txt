@@ -1,0 +1,9 @@
+Command: dir - Directory
+
+Syntax:	dir [path...] 	
+
+Lists a directory, with no arguments, lists the current directory. When given one or more files or wildcard matches, shows information about each one instead.
+
+Wildcards: 
+
+The characters * and ? can be used in a file name to match more than one file, the same as in MS-DOS. * matches any run of characters; ? matches any one character. Wildcards are understood by DIR, LS, COPY, MOVE, DEL, ATTRIB, XCOPY, and YS. If a wildcard does not match anything, the command is given the text exactly as typed instead.

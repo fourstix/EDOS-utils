@@ -1,0 +1,9 @@
+Command: del - Delete a File
+
+Syntax: del <file...>	
+
+Delete file(s) (wildcards supported).  To delete a directory use the rd command.
+
+Wildcards: 
+
+The characters * and ? can be used in a file name to match more than one file, the same as in MS-DOS. * matches any run of characters; ? matches any one character. Wildcards are understood by DIR, LS, COPY, MOVE, DEL, ATTRIB, XCOPY, and YS. If a wildcard does not match anything, the command is given the text exactly as typed instead.
