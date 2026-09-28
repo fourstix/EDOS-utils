@@ -12,7 +12,7 @@ These commands were written to run under [Elf-DOS](https://github.com/arhefner/E
 Elf-DOS Utility Commands
 --------------------------
 ## cal
-**Usage:** cal [-d|-e]
+**Usage:** cal [-d|-e]<br/>
 A Linux-style calendar utility originally written for Elf/OS by [Wayne Hortensius](https://github.com/mecparts/Elf-Elfos-cal) and adapted for Elf-DOS.
 
 If your Elf system includes an RTC, typing `cal` on the command line will show a calendar of the current month, with the current date highlighted. (The highlighting assumes a VT100/ANSI style terminal.)
@@ -30,20 +30,20 @@ The month name can be abbreviated to any unique month name prefix. `ja` will get
 Two digit year numbers between 01 and 99 are interpreted as 2001 to 2099.
 
 ## halt
-**Usage:** halt
+**Usage:** halt<br/>
 Halt the system by idling the processor.
 
 ## input
-**Usage:** input
+**Usage:** input<br/>
 Input and display data read from Port 4
 
 ## int
-**Usage:** int [-d|-e]
+**Usage:** int [-d|-e]<br/>
 Display the interrupt status and value of the IE flag.  The option -d will disable interrupts by
 setting the IE flag false.  The option -e will enable interrupts by setting the IE flag true.
 
 ## nop
-**Usage:** nop
+**Usage:** nop<br/>
 No Operation, a simple program that does nothing.
 
 ## output
@@ -51,15 +51,15 @@ No Operation, a simple program that does nothing.
 Send the hex value *hh* out to Port 4 *(where hh ranges in value from 00 to FF)*
 
 ## pause
-**Usage:** pause [-0|-1|-2|-3|-4, default = -4]
+**Usage:** pause [-0|-1|-2|-3|-4, default = -4]<br/>
 Display a prompt *Press Input to continue...* and wait for Input to return.  The options -1,-2,-3 or -4 will wait for input on the /EFn line.  The option -0 will wait for serial input. The default is to wait for Input on /EF4.
 
 ## req
-**Usage:** req
+**Usage:** req<br/>
 Reset Q.  This command turns the Q bit off. (Q = 0)
 
 ## seq
-**Usage:** seq
+**Usage:** seq<br/>
 Set Q.  This command turns the Q bit on. (Q = 1)
 
 Elf-DOS Batch Files
