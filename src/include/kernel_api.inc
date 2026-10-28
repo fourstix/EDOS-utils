@@ -140,6 +140,19 @@ RUN_ERRORLEVEL:     equ     PROG_BASE-110   ; byte: last command's exit
 IO_READ_TARGET:     equ     PROG_BASE-112   ; word: real f_uread/f_bread
 IO_TYPE_TARGET:     equ     PROG_BASE-114   ; word: real f_utype/f_btype
 
+; BOOT_UNIT: the block device unit the system booted from (0-7), which
+; is where C:-F: live. Written by boot/krnboot.asm at boot. Programs
+; that act on the boot device (SYS, KSAVE) use it as their default unit.
+BOOT_UNIT:          equ     PROG_BASE-115   ; byte: boot block device unit
+
+; IO_NBREAD_TARGET: the console's timed read routine, restated from
+; kernel.inc for boot/krnboot.asm, which writes it at boot: f_nbread,
+; or the kernel's blocking stand-in on a BIOS without that routine.
+; The kernel restores K_NBREAD's slot from it after every command, so a
+; console hook that replaces K_NBREAD must update it too, as with
+; IO_READ_TARGET and K_READ.
+IO_NBREAD_TARGET:   equ     PROG_BASE-117   ; word: current console timed read
+
 ; K_GET_ERRORLEVEL: read the last command's exit code. A real jump-table
 ; call rather than a direct RUN_ERRORLEVEL read, unlike the shell's own
 ; internal access -- an ordinary program shouldn't bake a kernel/shell-
@@ -217,11 +230,7 @@ FCB_IOBUF_LEN:  equ     512
 ;               not RD, since RD now carries the FCB pointer). The
 ;               full signed 32-bit range is accepted; file positions
 ;               and sizes are likewise supported up to the full 32
-;               bits FCB_FSIZE/FCB_FPOS hold (the underlying cluster-
-;               hop computation is only exercised up to a documented
-;               ~32MB in practice -- see kernel/file.asm's own
-;               fopen_check_append/fsk_general comments -- but is
-;               correct for any position that fits in 32 bits).
+;               bits FCB_FSIZE/FCB_FPOS hold.
 ;               Returns: DF = 0 on success (RA:RD = the resulting
 ;               absolute 32-bit position; RA = high word, RD = low
 ;               word. Widened 2026-09-08 -- RD alone used to be the
@@ -425,6 +434,11 @@ ATTR_HIDDEN:    equ     $02         ; DIRENT_ATTR bit set for hidden
                                     ; from kernel.inc, same "decoupled,
                                     ; not #included" reasoning as
                                     ; ATTR_DIR above
+ATTR_RDONLY:    equ     $01         ; DIRENT_ATTR bit set for read-only
+                                    ; files (2026-09-28): K_FILE_OPEN
+                                    ; refuses mode 1/2 and K_FILE_DELETE
+                                    ; refuses the file; reading and
+                                    ; renaming are allowed, as in MS-DOS
 
 ; ---- BIOS passthroughs (see include/bios.inc for each one's convention) ----
 ; Calling through here rather than directly into BIOS means a program
@@ -646,7 +660,11 @@ CUR_DRIVE_OFF:     equ  DRIVE_CUR_DIR_OFF + DRIVE_COUNT*2   ; 1 byte
 ; slot, 0 = free. Since 2026-09-09 a slot's letter is no longer 'C' +
 ; its index -- any slot may carry any letter A-Z -- so this table is the
 ; only way to convert either direction. lib/drives.asm wraps it; prefer
-; that to reading it directly.
+; that to reading it directly. A lettered slot is not necessarily
+; usable: MOUNT gives an UNFORMATTED partition a letter but leaves its
+; drive_present byte 0 (only BPBBLK_PART1_LBA/BPBBLK_DEV are filled in),
+; and FORMAT sets drive_present once it has written a filesystem.
+; Check drive_present before reading any other field of the entry.
 DRIVE_LETTER_OFF:  equ  CUR_DRIVE_OFF + 2      ; +1 for cur_drive,
                                                 ; +1 for active_bpb_drive
                                                 ; (which is deliberately
@@ -668,8 +686,8 @@ DRIVE_LETTER_OFF:  equ  CUR_DRIVE_OFF + 2      ; +1 for cur_drive,
 ; Args:    RF = pointer to a null-terminated path, already resolved
 ;          (and confirmed to exist) by the caller -- see
 ;          progs/shell.asm's own K_STAT-based existence check.
-; Returns: DF = 0 on success, DF = 1 if a batch is already active
-;          (nesting isn't supported) or the file couldn't be opened.
+; Returns: DF = 0 on success. DF = 1 on failure, with D = one of the
+;          BATCH_ERR_* codes below saying why.
 ;
 ; K_BATCH_READLINE: fetch the next line of the active batch script.
 ; Args:    none
@@ -679,6 +697,17 @@ DRIVE_LETTER_OFF:  equ  CUR_DRIVE_OFF + 2      ; +1 for cur_drive,
 ;          the very next call also returns DF=1 until a new
 ;          K_BATCH_START).
 K_BATCH_START:      equ     $016A       ; -> batch_start
+; K_BATCH_START's failure reasons, returned in D when DF=1 (2026-09-23).
+; Before this every failure looked the same, and the shell reported all
+; of them as "Nested batch not supported." -- including a missing
+; batch.mod, which is what a hardware user actually hit. Codes 2-4 are
+; mod_load's own MODLOAD_ERR_* values (include/modformat.inc), passed
+; through unchanged, so the two sets must stay numerically equal.
+BATCH_ERR_ACTIVE:   equ     1           ; a batch is already running
+BATCH_ERR_NOMOD:    equ     2           ; C:/bin/batch.mod not found
+BATCH_ERR_BADMOD:   equ     3           ; batch.mod unreadable/invalid
+BATCH_ERR_NOMEM:    equ     4           ; no room in RAM for batch.mod
+BATCH_ERR_OPEN:     equ     5           ; the .bat file wouldn't open
 K_BATCH_READLINE:   equ     $016D       ; -> batch_readline
 
 ; K_BATCH_GOTO: reposition the active batch script to just after a
@@ -780,6 +809,52 @@ K_HIMEM_RELEASE:    equ     $018B       ; -> kernel_himem_release
 ;   Returns: DF = 0 always
 K_DRIVE_INVALIDATE: equ     $018E       ; -> kernel_drive_invalidate
 
+; TERM_ROWS/TERM_COLS: the console terminal's size in rows/columns, one
+; byte each, kept by the kernel in volatile RAM (2026-09-30, kernel
+; v1.2). DATA bytes at fixed addresses, read and written directly -- no
+; call. 0 means unknown: that is the value at every boot. TERMSIZE sets
+; both, along with ROWS/COLUMNS. Values above 255 are stored as 255.
+; To lay out output, call term_size (lib/term.asm) rather than reading
+; these: it falls back to ROWS/COLUMNS and then 24x80 when they are 0.
+;
+; Why here and not only in the environment: reading COLUMNS means
+; opening and scanning /cfg/env.dat, which is fine once per program run
+; but far too slow for the line editor (lib/lineedit.asm), which needs
+; the width at the start of every input line to wrap long lines.
+TERM_ROWS:          equ     $0191       ; byte: terminal rows, 0=unknown
+TERM_COLS:          equ     $0192       ; byte: terminal columns, 0=unknown
+
+; K_NBREAD: read a single character from the console, giving up after a
+; timeout instead of blocking forever the way K_READ does. On the
+; console this goes straight to the BIOS's f_nbread, so call it, never
+; jump to it.
+;   Args:    RC = timeout, as a count of BIOS polling loops (0 = 65536).
+;            The length of one loop is up to the BIOS and the clock
+;            speed; on EDOS-mbios it is 12 machine cycles, so 24 us at
+;            4 MHz. The timeout only covers the wait for a character to
+;            start arriving.
+;   Returns: DF = 0, D = the character, RC = what was left of the count
+;            DF = 1 on timeout; do not rely on RC
+; Echoes the character if the BIOS's echo flag is set, same as f_read.
+;
+; Follows input redirection the same way K_READ does: kernel/redir.asm
+; repatches this slot per command and restores it from IO_NBREAD_TARGET
+; afterward. While input comes from a file each call returns the next
+; byte at once, with RC untouched, and the end of the file (or the NUL
+; device) is a timeout -- so unlike K_READ, the end of the input can be
+; told apart from a zero byte.
+;
+; f_nbread is an extension that not every Elf/OS-compatible BIOS has.
+; At boot the kernel looks for a long branch (\$C0) at f_nbread's vector,
+; \$FF84. If there is none, this call becomes a plain blocking read: it
+; waits as long as K_READ would and always returns DF = 0, so a program
+; gets no timeout but does not fail. A program can tell by comparing
+; the word at IO_NBREAD_TARGET with f_nbread: any other value means the
+; blocking stand-in is in use. The test is only
+; as good as that one byte: a BIOS with some other routine's vector at
+; \$FF84 passes it and K_NBREAD will misbehave there.
+K_NBREAD:           equ     $0193       ; -> f_nbread
+
 ; GLOB_BUF_LEN REMOVED along with K_GLOB_RESERVE above (dead code,
 ; 2026-08-26) -- its only use was sizing that reservation.
 
@@ -851,7 +926,7 @@ PT_ENTRY_LEN:   equ     16          ; bytes between successive MBR
                                     ; PT_OFFSET + i*PT_ENTRY_LEN
 PT_LBA_OFF:     equ     8           ; LBA start within entry (4 bytes, LE)
 
-; next free jump-table slot address: $0191
+; next free jump-table slot address: $0196 (after K_NBREAD)
 ;
 ; This comment has been stale in BOTH directions before ($0179 until
 ; 2026-07-27, then $0197 until 2026-09-09) while kernel.asm was right

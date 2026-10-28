@@ -60,7 +60,7 @@ chk_arg:  glo     rc              ; check argc (for 2 or 1)
           lbr     bad_arg         ; anything else is a bad argument
 
 waits:    call    K_MSG           ; display prompt
-          call    f_input         ; wait here for serial input
+          call    K_READ          ; wait here for serial input
           lbr     goodbye         ; exit
 
 wait1:    call    K_MSG           ; display prompt
@@ -92,7 +92,7 @@ bad_arg:  load    rf, usage       ; show usage text and exit
           call    K_MSG
           load    rf, info4
           call    K_MSG
-          abend                   ; return to Elf-DOS with error code
+          fail    -1              ; return to Elf-DOS with error code
 
 prompt:   db 'Press Input to continue...',0
 usage:    db 'Usage: pause [-0|-1|-2|-3|-4, default = -4]',13,10,0

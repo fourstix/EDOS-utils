@@ -32,6 +32,6 @@ start:    glo     rc              ; check argc (1 -> no args)
 
 bad_arg:  call     K_INMSG
             db 'Usage: halt',13,10,'Halt the System.',13,10,0
-          abend                   ; return to Elf-DOS with error
+          fail     -1             ; return to Elf-DOS with error
         ;------ end of program
         end     start

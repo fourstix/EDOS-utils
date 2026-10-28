@@ -47,7 +47,7 @@ setting the IE flag false.  The option -e will enable interrupts by setting the 
 No Operation, a simple program that does nothing.
 
 ## output
-**Usage:** output *hh*
+**Usage:** output *hh*<br/>
 Send the hex value *hh* out to Port 4 *(where hh ranges in value from 00 to FF)*
 
 ## pause

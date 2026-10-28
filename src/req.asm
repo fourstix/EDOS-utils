@@ -30,7 +30,7 @@ start:    glo     rc              ; check argc (1 -> no args)
 
 bad_arg:  call     K_INMSG
             db 'Usage: req',13,10,'Reset the Q bit.',13,10,0
-          abend                   ; return to Elf-DOS with error
+          fail     -1             ; return to Elf-DOS with error
 
         ;------ end of program block
         end     start

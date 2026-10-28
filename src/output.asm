@@ -7,6 +7,9 @@
 #include    include/bios.inc
 #include    include/kernel_api.inc
 
+; define additional bios vectors used
+f_hexin:    equ  $f045            ; convert ascii number to hex
+
         org     PROG_BASE
 
 ;------------------------------------------------------------------
@@ -27,7 +30,7 @@ start:    glo     rc                  ; check argc (2 -> 1 arg)
 
 bad_arg:  call    K_INMSG             ; otherwise display usage msg
             db      'Usage: output hh, where hh is a hexadecimal number',13,10,0
-          abend                       ; return to Elf-DOS
+          fail     -1                 ; return to Elf-DOS
 
 good:     copy    ra, rb
           add16   rb, 2               ; RB = &argv[1]
