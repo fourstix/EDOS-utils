@@ -64,7 +64,24 @@ Set Q.  This command turns the Q bit on. (Q = 1)
 
 Elf-DOS Batch Files
 --------------------------
+## about
+**Usage:** about<br/>
+Show information about the disk contained in the file */cfg/about.nfo*
 
+## help
+**Usage:** help *cmd*
+Show information about the command *cmd* contained in the file */hlp/cmd.txt*. Type `help` alone for more information.
 
 Elf-DOS Help Text Files
 --------------------------
+
+These are text files used by the `help` batch file.  The should all be copied to a directory named `/hlp`. To view a file for a command type  `help` followed by the name of the command, for example `help dir` will show the contents of */hlp/dir.txt* and give infomration about the `dir` command.
+
+Other Elf-DOS Programs
+------------------------
+## kilo
+**Usage:** kilo *filename*
+
+Kilo is a full screen editor for the Elf-DOS written in 1802 Assembly language and based loosely on the Kilo editor by Salvatore Sanfilippo aka antirez and the Elfos-Edit editor by Mike Riley.
+
+The kilo editor was ported to Elf-DOS by Tony Hefner and is available at [EDOS-kilo](https://github.com/arhefner/EDOS-kilo).
