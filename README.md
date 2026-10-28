@@ -85,3 +85,81 @@ Other Elf-DOS Programs
 Kilo is a full screen editor for the Elf-DOS written in 1802 Assembly language and based loosely on the Kilo editor by Salvatore Sanfilippo aka antirez and the Elfos-Edit editor by Mike Riley.
 
 The kilo editor was ported to Elf-DOS by Tony Hefner and is available at [EDOS-kilo](https://github.com/arhefner/EDOS-kilo).
+
+## stg_edos.hex
+
+A hex file containing a version of the [STG Elf2K](https://github.com/SpareTimeGizmos/Elf2K) ROM containing the EDOS ROM kernel.  This hex file can be used to burn a EPROM for the Pico/Elf v2 or Elf2K system that enables EDOS to run on a system with only 32k RAM memory.  This hex file was built with the [STG Tools](https://github.com/SpareTimeGizmos/tools) and the [Elf-DOS](https://github.com/arhefner/ELF-DOS) ROM kernel.
+
+
+Repository Contents
+-------------------
+
+* **/src/**  -- Source files for Elf-DOS utilities.
+  * build.bat - Windows batch file to assemble source file with Asm/02 to create binary file. Use the command *build xxx* to assemble the xxx.asm file into a binary file.
+* **/src/include/**  -- Include files for Elf/OS file utilities.
+  * opcodes.def - Opcode definitions for Asm/02.
+  * bios.inc - Bios definitions from Elf-DOS.
+  * kernel_api.inc - Kernel API definitions from Elf-OS.
+* **/bin/**  -- Binary files for Elf-DOS utilities.
+* **/bin/other/**  -- Binary files for Other Elf-DOS programs.
+  * kilo -- Binary file for kilo text editor
+  * stg_edos.hex -- Hex file for STG EDOS ROM.
+* **/bat/**  -- Batch utility files for Elf-DOS.
+* **/hlp/**  -- Help text files for Elf-DOS help batch utility.
+
+License Information
+-------------------
+
+This code is public domain under the MIT License, but please buy me a beverage if you use this and we meet someday (Beerware).
+
+References to any products, programs or services do not imply
+that they will be available in all countries in which their respective owner operates.
+
+Any company, product, or services names may be trademarks or services marks of others.
+
+All libraries used in this code are copyright their respective authors.
+
+This code is based on a Elf-DOS code libraries written by Tony Hefner and assembled with the Asm/02 assembler written by Mike Riley.
+
+
+Elf-DOS
+Copyright (c) 2026 by Tony Hefner
+
+Asm/02 1802 Assembler
+Copyright (c) 2004-2026 by Mike Riley
+
+The Pico/Elf Microcomputer Hardware
+Copyright (c) 2020-2026 by Mike Riley
+
+The STG Pico/Elf EPROM
+Copyright (c) 2004-2026 by Spare Time Gizmos.
+
+STG NVR/RTC/UART Pico/Elf Expansion Card hardware
+Copyright (c) 2020-2026 by Spare Time Gizmos.
+
+The 1802-Mini Microcomputer Hardware
+Copyright (c) 2020-2026 by David Madole
+
+Many thanks to the original authors for making their designs and code available as open source.
+
+This code, firmware, and software is released under the [MIT License](http://opensource.org/licenses/MIT).
+
+The MIT License (MIT)
+
+Copyright (c) 2026 by Gaston Williams
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+**THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.**
