@@ -9,8 +9,12 @@ A lot of information and software for Elf-DOS and 1802 MiniComputers can be foun
 
 These commands were written to run under [Elf-DOS](https://github.com/arhefner/ELF-DOS) written by Tony Hefner.
 
-Elf-DOS Utility Commands
+Elf-DOS Utility Programs
 --------------------------
+## adventureland
+**Usage:** adventureland<br/>
+Port of the [Elf/OS adventureland](https://github.com/fourstix/Elf-Elfos-adventureland-plus) game written by Wayne Hortensius.
+
 ## cal
 **Usage:** cal [month year]<br/>
 A Linux-style calendar utility originally written for Elf/OS by [Wayne Hortensius](https://github.com/mecparts/Elf-Elfos-cal) and adapted for Elf-DOS.
@@ -82,13 +86,17 @@ Other Elf-DOS Programs
 ## kilo
 **Usage:** kilo *filename*
 
-Kilo is a full screen editor for the Elf-DOS written in 1802 Assembly language and based loosely on the Kilo editor by Salvatore Sanfilippo aka antirez and the Elfos-Edit editor by Mike Riley.
+Kilo is a full screen editor for the Elf-DOS. The [Elf/OS kilo](https://github.com/fourstix/Elfos-kilo) editor was written in 1802 Assembly language by Gaston Williams and based loosely on the Kilo editor by Salvatore Sanfilippo aka antirez and the Elfos-Edit editor by Mike Riley.
 
 The kilo editor was ported to Elf-DOS by Tony Hefner and is available at [EDOS-kilo](https://github.com/arhefner/EDOS-kilo).
 
+
+STG + Elf-DOS Kernel ROM
+-------------------------
+
 ## stg_edos.hex
 
-A hex file containing a version of the [STG Pico Elf ROM](https://github.com/SpareTimeGizmos/Elf2K) containing the Elf-DOS ROM kernel.  This hex file can be used to burn a EPROM for the Pico/Elf v2 system that enables Elf-DOS to run on a system with only 32k RAM memory.  This hex file was built with the [STG Tools](https://github.com/SpareTimeGizmos/tools) and the [Elf-DOS](https://github.com/arhefner/ELF-DOS) ROM kernel.
+A hex file containing a version of the [STG Elf ROM](https://github.com/SpareTimeGizmos/Elf2K) containing the Elf-DOS ROM kernel.  This hex file can be used to burn a EPROM for the Pico/Elf v2 system that enables Elf-DOS to run on a system with only 32k RAM memory.  This hex file was built with the [STG Tools](https://github.com/SpareTimeGizmos/tools) and the [Elf-DOS](https://github.com/arhefner/ELF-DOS) ROM kernel.
 
 STG + Elf-DOS Kernel ROM Memory Map
 ------------------------------------
@@ -171,6 +179,7 @@ Repository Contents
 * **/bin/**  -- Binary files for Elf-DOS utilities.
 * **/bin/other/**  -- Binary files for Other Elf-DOS programs.
   * kilo -- Binary file for kilo text editor
+* **/bin/stdEDOS/**
   * stg_edos.hex -- Hex file for STG EDOS ROM.
 * **/bin/pixie/**  -- Binary files for Elf-DOS Pixie Video demos.
 * **/bat/**  -- Batch utility files for Elf-DOS.
@@ -188,7 +197,7 @@ Any company, product, or services names may be trademarks or services marks of o
 
 All libraries used in this code are copyright their respective authors.
 
-This code is based on a Elf-DOS code libraries written by Tony Hefner and assembled with the Asm/02 assembler written by Mike Riley.
+This code is based on a Elf-DOS code libraries written by Tony Hefner and built with the Asm/02 assembler and Link/02 linker written by Mike Riley.
 
 
 Elf-DOS Operating System<br/>
