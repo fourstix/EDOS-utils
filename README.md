@@ -13,7 +13,7 @@ Elf-DOS Utility Programs
 --------------------------
 ## adventureland
 **Usage:** adventureland<br/>
-Port of the [Elf/OS adventureland](https://github.com/fourstix/Elf-Elfos-adventureland-plus) game written by Wayne Hortensius.
+Port of the [Elf/OS adventureland](https://github.com/fourstix/Elf-Elfos-adventureland-plus) game written by Wayne Hortensius to Elf-DOS.
 
 ## cal
 **Usage:** cal [month year]<br/>
