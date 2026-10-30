@@ -31,6 +31,10 @@
 #include    include/kernel_api.inc
 #include    include/opcodes.def
 
+; define additional bios vectors used
+f_isnum:    equ  $f05a            ; determine if D is numeric
+f_memcpy:   equ  $f01b            ; copy memory
+
 ; bits for hardware device map (K_GETDEV)
 ;---- IDE bit
 #define     b_devIDE    $01
@@ -44,6 +48,7 @@
 #define     b_devRTC    $10
 ;---- NVRAM bit
 #define     b_devNVR    $20
+
 
 
             org     PROG_BASE

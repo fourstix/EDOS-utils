@@ -7,6 +7,7 @@
 #include    include/bios.inc
 #include    include/kernel_api.inc
 
+
         org     PROG_BASE
 
 ;------------------------------------------------------------------
@@ -38,7 +39,7 @@ start:  glo     rc                 ; check argc (1 -> no args)
 
 bad_arg:  call     K_INMSG
             db 'Usage: input',13,10,'Display input data read from Port 4.',13,10,0
-          abend                     ; return to Elf-DOS with error
+          fail     -1               ; return to Elf-DOS with error
 buffer: db  0,0,13,10,0             ; 2 char hex value + crlf
         ;------ end of program
         end     start
