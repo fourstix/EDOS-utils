@@ -96,31 +96,31 @@ STG + Elf-DOS Kernel ROM Memory Map
   <tr align="center">
    <th colspan="2">Address Range</th>
    <th>Program</th>
-   <th>Size</th>
+   <th>Size in</th>
   </tr>
   <tr align="center">
    <th>Start</th>
    <th>Stop</th>
    <th>Name</th>
-   <th>in Pages</th>
+   <th>256-Byte Pages</th>
   </tr>
   <tr align="center">
    <td>8000H</td>
    <td>94FFH</td>
    <td>Boots Monitor</td>
-   <td>15</td>
+   <td>21</td>
   </tr>
   <tr align="center">
    <td>9500H</td>
    <td>9CFFH</td>
    <td>Help Menu</td>
-   <td>6</td>
+   <td>8</td>
   </tr>
   <tr align="center">
    <td>BC40H</td>
    <td>EF2BH</td>
    <td>Elf-DOS Kernel</td>
-   <td>34</td>
+   <td>52</td>
   </tr>
   <tr align="center">
    <td>F000H</td>
