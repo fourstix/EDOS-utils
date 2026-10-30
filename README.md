@@ -81,8 +81,8 @@ Elf-DOS Help Text Files
 
 These are text files used by the `help` batch file.  The should all be copied to a directory named `/hlp`. To view a file for a command type  `help` followed by the name of the command, for example `help dir` will show the contents of */hlp/dir.txt* and give infomration about the `dir` command.
 
-Other Elf-DOS Programs
-------------------------
+Elf-DOS Kilo Editor
+--------------------
 ## kilo
 **Usage:** kilo *filename*
 
@@ -177,7 +177,7 @@ Repository Contents
 * **/src/stgEDOS/**  -- Source files for building the STG + Elf-DOS ROM.
   * Make_StgEDOS.bat - Windows batch file for building the STG + Elf-DOS ROM.
 * **/bin/**  -- Binary files for Elf-DOS utilities.
-* **/bin/other/**  -- Binary files for Other Elf-DOS programs.
+* **/bin/kilo/**  -- Binary files for Other Elf-DOS programs.
   * kilo -- Binary file for kilo text editor
 * **/bin/stdEDOS/**
   * stg_edos.hex -- Hex file for STG EDOS ROM.
