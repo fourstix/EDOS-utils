@@ -191,31 +191,31 @@ All libraries used in this code are copyright their respective authors.
 This code is based on a Elf-DOS code libraries written by Tony Hefner and assembled with the Asm/02 assembler written by Mike Riley.
 
 
-Elf-DOS Operating System
+Elf-DOS Operating System<br/>
 Copyright (c) 2026 by Tony Hefner.
 
-Asm/02 1802 Assembler
+Asm/02 1802 Assembler<br/>
 Copyright (c) 2004-2026 by Mike Riley
 
-Link/02 1802 Linker
+Link/02 1802 Linker<br/>
 Copyright (c) 2004-2026 by Mike Riley
 
-The Pico/Elf Microcomputer Hardware
+The Pico/Elf Microcomputer Hardware<br/>
 Copyright (c) 2020-2026 by Mike Riley
 
-The STG Pico/Elf EPROM
+The STG Pico/Elf EPROM<br/>
 Copyright (c) 2004-2026 by Spare Time Gizmos.
 
-STG NVR/RTC/UART Pico/Elf Expansion Card hardware
+STG NVR/RTC/UART Pico/Elf Expansion Card hardware<br/>
 Copyright (c) 2020-2026 by Spare Time Gizmos.
 
-The 1802-Mini Microcomputer Hardware
+The 1802-Mini Microcomputer Hardware<br/>
 Copyright (c) 2020-2026 by David Madole.
 
-SBC1802 Cosmac MicroSystem Hardware
+SBC1802 Cosmac MicroSystem Hardware<br/>
 Copyright (C) 2021-2026 by Spare Time Gizmos.
 
-AVI ELF II Rev D Microcomputer Hardware
+AVI ELF II Rev D Microcomputer Hardware<br/>
 Copyright 2022-2026 by Josh Bensadon, Andrew Wassan, et al.
 
 Many thanks to the original authors for making their designs and code available as open source.
