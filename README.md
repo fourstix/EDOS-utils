@@ -177,7 +177,7 @@ Repository Contents
 * **/src/stgEDOS/**  -- Source files for building the STG + Elf-DOS ROM.
   * Make_StgEDOS.bat - Windows batch file for building the STG + Elf-DOS ROM.
 * **/bin/**  -- Binary files for Elf-DOS utilities.
-* **/bin/kilo/**  -- Binary files for Other Elf-DOS programs.
+* **/bin/kilo/**
   * kilo -- Binary file for kilo text editor
 * **/bin/stdEDOS/**
   * stg_edos.hex -- Hex file for STG EDOS ROM.
