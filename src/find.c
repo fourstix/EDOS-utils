@@ -30,12 +30,27 @@ typedef struct entry {
 
 //grw - flag to show hidden entries
 int show = 0;
-//grw - flag to match as prefix substring
+//grw - flag to match as prefix
 int prefix = 0;
 //grw - insensitive case match flag
 int icase  = 0;
+//grw -flag to match  as suffix
+int suffix = 0;
 
-//grw - flag to show only directories
+int endstr(const char *str, const char *sfx, int ignore) {
+  int result = 0;
+  int lenstr = strlen(str);
+  int lensfx = strlen(sfx);
+
+  if (lensfx > lenstr) {
+    result = 0;
+  } else if (ignore) {
+    result = !strcasecmp(str + lenstr - lensfx, sfx);
+  } else {
+    result = !strcmp(str + lenstr - lensfx, sfx);
+  }
+  return result;
+}
 
 int walk(const char* directory, const char* name, counter_t *counter) {
   entry_t *head = NULL, *current, *iter;
@@ -107,6 +122,8 @@ int walk(const char* directory, const char* name, counter_t *counter) {
       } else {
         found = !strncmp(head->name, name, strlen(name));
       }
+    } else if (suffix) {
+      found = endstr(head->name, name, icase);
     } else if (icase) {
       found = !strcasecmp(head->name, name);
     } else {
@@ -145,9 +162,10 @@ int walk(const char* directory, const char* name, counter_t *counter) {
 }
 
 void usage(void) {
-  fprintf(stderr, "Usage: find [-h|-i] name [directory, default = current]\n");
-  fprintf(stderr, " Show find entries matching name in a directory and its sub-directories\n");
-  fprintf(stderr, "  -h = show hidden items\n  -i = case insensitive match.\n  -p = match name as prefix\n");
+  fprintf(stderr, "Usage: find [-h|-i|-p|-s] name [directory, default = current]\n");
+  fprintf(stderr, "  Show entries matching name in a directory and its sub-directories\n");
+  fprintf(stderr, "  -h = show hidden items\n  -i = case insensitive match.\n");
+  fprintf(stderr, "  -p = match name as prefix\n  -s = match name as suffix\n");
 }
 
 int main(int argc, char *argv[]) {
@@ -169,6 +187,8 @@ int main(int argc, char *argv[]) {
               icase = 1;
             } else if (c == 'p') {
               prefix = 1;
+            } else if (c == 's') {
+              suffix = 1;
             } else {
               usage();
               return -1;

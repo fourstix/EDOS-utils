@@ -34,8 +34,8 @@ The month name can be abbreviated to any unique month name prefix. `ja` will get
 Two digit year numbers between 01 and 99 are interpreted as 2001 to 2099.
 
 ## find
-**Usage:** find [-i|-p|-h] *name* [directory, default = current]<br/>
-Search a directory and its sub-directories for file names matching *name*.  If no directory is specified then the current directory will be searched.  The option -i will ignore case when matching file names, the option -p, will match *name* as prefix beginning file names and the option -h, will include hidden files and directories in the search.
+**Usage:** find [-i|-h|-p|-s] *name* [directory, default = current]<br/>
+Search a directory and its sub-directories for file names matching *name*.  If no directory is specified then the current directory will be searched.  The option -h, will include hidden files and directories in the search; The option -i will ignore case when matching file names; the option -p, will match *name* as prefix beginning file names and the option -s, will match *name* as suffix ending file names .
 
 ## halt
 **Usage:** halt<br/>
